@@ -23,7 +23,7 @@ class MemberRepositoryTest {
         Member member = Member.builder()
                 .email("test@test.com")
                 .name("까미")
-                .address("겅기도 안산시")
+                .address("경기도 안산시")
                 .password(passwordEncoder.encode("1234"))
                 .role(Role.USER)
                 .build();

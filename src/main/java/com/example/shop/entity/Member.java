@@ -36,14 +36,14 @@ public class Member {
     public static Member createMember(MemberFormDto memberFormDto,
                                       PasswordEncoder passwordEncoder) {
 
-
+        // 비밀번호 인코딩 때문에 DB에는 절대 원본 비밀번호가 저장되지 않고, $2a$10$... 형태의 BCrypt 해시값이 저장
 //        String Password = passwordEncoder.encode(memberFormDto.getPassword());
         return Member.builder()
                 .name(memberFormDto.getName())
                 .email(memberFormDto.getEmail())
-                .password(passwordEncoder.encode(memberFormDto.getPassword()))
+                .password(passwordEncoder.encode(memberFormDto.getPassword())) // 비밀번호 인코딩
                 .address(memberFormDto.getAddress())
-                .role(Role.USER)
+                .role(Role.ADMIN) // 기본 권한 설정
                 .build();
     }
 }
