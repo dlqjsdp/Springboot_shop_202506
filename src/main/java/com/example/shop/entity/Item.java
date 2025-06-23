@@ -17,7 +17,7 @@ public class Item {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-
+    @Column(name="item_id")
     private Long id; // 상품 코드
 
     @Column(nullable = false, length = 50)

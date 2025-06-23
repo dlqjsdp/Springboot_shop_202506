@@ -44,7 +44,7 @@ public class SecurityConfig {
                                 .failureUrl("/members/login/error")
                 )
                 .logout(logout-> logout
-                        .logoutSuccessUrl("/members/logout") // 변경된 부분: logoutRequestMatcher 대신 logoutUrl 사용
+                        .logoutUrl("/members/logout") // 변경된 부분: logoutRequestMatcher 대신 logoutUrl 사용
                         .logoutSuccessUrl("/")
 
                         .invalidateHttpSession(true) // 세션 무효화 (선택 사항이지만 일반적으로 사용)
