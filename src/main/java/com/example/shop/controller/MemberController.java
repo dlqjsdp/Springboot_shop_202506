@@ -50,7 +50,12 @@ public class MemberController {
     public String MemberForm(@Valid MemberFormDto memberFormDto, // @Valid로 DTO 유효성 검사
                              BindingResult bindingResult, Model model) { // BindingResult에 에러가 있으면 memberForm.html 다시 반환
 
+        // @Valid : memberFormDto의 필드에 설정된 유효성 검사를 수행
+        // BindingResult : 유효성 검사 후 오류 정보를 담는 객체
+        // Model : 뷰에 데이터를 전달하기 위한 Spring의 모델 객체
+
         if(bindingResult.hasErrors()) {
+            // 유효성 검사에서 오류가 발생한 경우 회원가입 폼으로 다시 이동
             return "member/memberForm";
         }
 
@@ -60,10 +65,12 @@ public class MemberController {
             // 동시에 passwordEncoder를 사용해 비밀번호를 암호화하는 로직이 실행됩니다.
             memberService.save(member);
         }catch (IllegalArgumentException e) {
+            // 회원 생성 중 IllegalArgumentException 발생 시 에러 메시지를 모델에 담아서 폼 페이지로 이동
             model.addAttribute("errorMessage", e.getMessage());
             return "member/memberForm";
         }
 
+        // 회원가입 성공 시 홈 페이지로 리다이렉트
         return "redirect:/";
     }
 }

@@ -9,18 +9,20 @@ import lombok.ToString;
 @Getter @Setter
 @ToString
 @Table(name="cart_item")
-public class CartItem {
+public class CartItem extends BaseEntity{
 
     @Id
     @GeneratedValue
     @Column(name="cart_item_id")
     private Long cartItemId;
 
-    @ManyToOne // 하나의 장바구니(Cart)는 여러 개의 장바구니 항목(CartItem)을 가짐
+    // 하나의 장바구니(Cart)는 여러 개의 장바구니 항목(CartItem)을 가짐
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name="cart_id")
     private Cart cart;
 
-    @ManyToOne // 하나의 상품(Item)은 여러 장바구니 항목(CartItem)에서 사용될 수 있음
+    // 하나의 상품(Item)은 여러 장바구니 항목(CartItem)에서 사용될 수 있음
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name="item_id")
     private Item item;
 

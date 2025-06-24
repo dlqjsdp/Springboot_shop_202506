@@ -13,7 +13,7 @@ import java.time.LocalDateTime;
 @Getter
 @ToString
 @Setter
-public class Item {
+public class Item extends BaseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -36,7 +36,4 @@ public class Item {
     @Enumerated(EnumType.STRING) // 필수! EnumType.ORDINAL을 사용하면 enum 순서가 바뀌면 데이터 오류 발생 가능
     private ItemSellStatus itemSellStatus; // 상품 판매 상태
 
-    private LocalDateTime regTime; // 등록 시간
-
-    private LocalDateTime updateTime; // 수정 시간
 }
