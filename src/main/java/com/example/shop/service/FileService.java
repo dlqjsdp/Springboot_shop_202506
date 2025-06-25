@@ -14,7 +14,7 @@ public class FileService {
     
     public String uploadFile(String uploadPath, String originalFilename, 
                              byte[] fileData) throws Exception {
-        UUID uuid = UUID.randomUUID();
+        UUID uuid = UUID.randomUUID(); // 중복 방지를 위한 파일명 생성
 
         // sampletest.jpg
         String extension = originalFilename.substring(originalFilename.lastIndexOf("."));
