@@ -59,9 +59,24 @@
     <!-- 상품 등록/수정 form -->
     <form role="form" method="post" enctype="multipart/form-data" th:object="${itemFormDto}">
 
-        <p class="h2">
-            상품 등록
-        </p>
+        <!--
+            itemFormDto.itemImgDtoList가 비어 있는 경우(= 이미지 정보가 없음)
+            즉, 신규 등록 폼을 처음 열었을 때를 의미함
+        -->
+        <div th:if="${#lists.isEmpty(itemFormDto.itemImgDtoList)}">
+            <p class="h2">
+                상품 등록 <!-- 신규 등록일 경우 제목을 '상품 등록'으로 표시 -->
+            </p>
+        </div>
+        <!--
+            itemFormDto.itemImgDtoList에 값이 있는 경우(= 기존 이미지 정보가 있음)
+            즉, 이미 등록된 상품을 수정하는 경우임
+        -->
+        <div th:if = "${not #lists.isEmpty(itemFormDto.itemImgDtoList)}">
+            <p class="h2">
+                상품 수정 <!-- 수정일 경우 제목을 '상품 수정'으로 표시 -->
+            </p>
+        </div>
 
         <!-- ID는 숨겨진 필드 (수정 시에만 값 존재) -->
         <input type="hidden" th:field="*{id}">

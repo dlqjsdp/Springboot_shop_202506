@@ -38,9 +38,15 @@ public class ItemFormDto {
 
     private ItemSellStatus itemSellStatus; // 상품 판매 상태
 
+    // 상품 이미지를 리스트로 저장
     private List<ItemImgDto> itemImgDtoList = new ArrayList<>();
 
-    private List<Long> itemImgId = new ArrayList<>();
+    /*
+       ItemImg entity에 item_img_id값을 리스트로 가지고 있다.
+       이미지 수정시 특정 상품에서 전체 이미지를 수정하지 않고,
+       개별 이미지를 수정하기 위한 용도로 item_img_id를 가지고 있기 위해서
+    */
+    private List<Long> itemImgIds = new ArrayList<>();
 
     private static ModelMapper modelMapper = new ModelMapper();
 
