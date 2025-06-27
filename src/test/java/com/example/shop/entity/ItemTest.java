@@ -1,6 +1,7 @@
 package com.example.shop.entity;
 
 import com.example.shop.constant.ItemSellStatus;
+import com.example.shop.repository.ItemImgRepository;
 import com.example.shop.repository.ItemRepository;
 import com.querydsl.core.BooleanBuilder;
 import com.querydsl.core.Tuple;
@@ -28,11 +29,14 @@ class ItemTest {
 
     JPAQueryFactory queryFactory;
 
+    @Autowired
+    private ItemImgRepository itemImgRepository;
+
     @BeforeEach
     void setUp() {
         queryFactory = new JPAQueryFactory(em);
     }
-
+    // itemNm 조회
     @Test
     public void testFindByItemNm() {
         List<Item> items = itemRepository.findByItemNm("떡볶이");
@@ -155,17 +159,16 @@ class ItemTest {
     public void testAggreegateFunction(){
         QItem qItem = QItem.item;
 
-        Tuple tuple = queryFactory
+        List<Tuple> fetch = queryFactory
                 .select(
                         qItem.itemSellStatus,
                         qItem.price.avg()
                 )
                 .from(qItem)
                 .groupBy(qItem.itemSellStatus)
-                .fetchOne();
+                .fetch();
 
-        log.info("판매 상태 : {}", tuple.get(qItem.itemSellStatus));
-        log.info("평균 가격 : {}", tuple.get(qItem.price.avg()));
+        fetch.stream().forEach( item-> log.info(item.toString()));
     }
 
     // ItemImg 조회
