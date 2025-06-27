@@ -88,7 +88,7 @@ public class ItemRepositoryCustomImpl implements ItemRepositoryCustom {
 
         // 검색 조건 로그 출력 (디버깅용)
         log.info("itemSearchDto.getSearchDateType() : {}", itemSearchDto.getSearchDateType());
-        log.info("itemSearchDto.getItemSellStatus() : {}", itemSearchDto.getItemSellStatus());
+        log.info("itemSearchDto.getItemSellStatus() : {}", itemSearchDto.getSearchSellStatus());
         log.info("itemSearchDto.getSearchBy(), itemSearchDto.getSearchQuery() : {}",
                 searchByLike(itemSearchDto.getSearchBy(), itemSearchDto.getSearchQuery()));
 
@@ -97,7 +97,7 @@ public class ItemRepositoryCustomImpl implements ItemRepositoryCustom {
                 .selectFrom(QItem.item)
                 .where(
                         regDtsAfter(itemSearchDto.getSearchDateType())
-                        , searchSellStatus(itemSearchDto.getItemSellStatus())
+                        , searchSellStatus(itemSearchDto.getSearchSellStatus())
                         , searchByLike(itemSearchDto.getSearchBy(), itemSearchDto.getSearchQuery())
                 )
                 .orderBy(QItem.item.id.desc()) // 최신순 정렬

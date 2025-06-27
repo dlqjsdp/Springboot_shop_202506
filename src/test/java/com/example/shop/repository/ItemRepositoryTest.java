@@ -117,7 +117,7 @@ class ItemRepositoryTest {
         // Given: 테스트에 필요한 검색 조건 설정
         ItemSearchDto searchDto = new ItemSearchDto();
         searchDto.setSearchDateType("all"); // 등록일 조건 없음 (전체 검색)
-        searchDto.setItemSellStatus(ItemSellStatus.SOLD_OUT); // 품절 상품만 조회
+        searchDto.setSearchSellStatus(ItemSellStatus.SOLD_OUT); // 품절 상품만 조회
         searchDto.setSearchBy("itemNm"); // 검색 기준: 상품명
         searchDto.setSearchQuery("자바"); // 검색어: "자바" 포함
 
@@ -140,7 +140,7 @@ class ItemRepositoryTest {
         // Given: 테스트에 필요한 검색 조건 설정
         ItemSearchDto searchDto = new ItemSearchDto();
         searchDto.setSearchDateType("all"); // 등록일 조건 없음 (전체 검색)
-        searchDto.setItemSellStatus(ItemSellStatus.SELL); // 판매중 상품만 조회
+        searchDto.setSearchSellStatus(ItemSellStatus.SELL); // 판매중 상품만 조회
         // searchBy, searchQuery 없음 (전체 SELL)
 
         PageRequest pageRequest = PageRequest.of(0, 5); // 페이지 번호 0, 한 페이지 5개
@@ -163,7 +163,7 @@ class ItemRepositoryTest {
         // Given: 테스트에 필요한 검색 조건 설정
         ItemSearchDto searchDto = new ItemSearchDto();
         searchDto.setSearchDateType("1w"); // 등록일: 최근 일주일 이내
-        searchDto.setItemSellStatus(ItemSellStatus.SELL); // 판매중 상품만 조회
+        searchDto.setSearchSellStatus(ItemSellStatus.SELL); // 판매중 상품만 조회
         // searchBy, searchQuery 없음 (전체 SELL)
 
         PageRequest pageRequest = PageRequest.of(0, 5); // 페이지 번호 0, 한 페이지 5개
