@@ -27,6 +27,7 @@ public class SecurityConfig {
                         .requestMatchers("/css/**", "/js/**", "/images/**").permitAll() // 정적 리소스는 누구나 접근 허용
                                 .requestMatchers("/", "/members/**", "/item/**").permitAll() // 메인 페이지, 회원 관련 페이지, 상품 조회는 누구나 접근 허용
                                 .requestMatchers("/admin/**").hasRole("ADMIN") // /admin으로 시작하는 모든 경로는 ROLE_ADMIN 권한이 있어야 접근 가능
+                                //.requestMatchers("/admin/**").permitAll()
                                 .anyRequest().authenticated() // 나머지 모든 요청은 로그인한 사용자만 접근 가능
                 );
 
