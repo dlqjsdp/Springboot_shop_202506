@@ -18,8 +18,8 @@ public class OrderHistDto {
     private String orderDate; // 주문 날짜
     private OrderStatus orderStatus; // 주문 상태
 
-    // 주문 리스트
-    private List<OrderItemDto> orderItemList = new ArrayList<>();
+    // 주문 리스트               orderItemDtoList
+    private List<OrderItemDto> orderItemDtoList = new ArrayList<>();
 
     public OrderHistDto(Order order) {
         this.orderId = order.getId();
@@ -29,6 +29,7 @@ public class OrderHistDto {
     }
 
     public void addOrderItem(OrderItemDto orderItemDto) {
-        this.orderItemList.add(orderItemDto);
+
+        this.orderItemDtoList.add(orderItemDto);
     }
 }

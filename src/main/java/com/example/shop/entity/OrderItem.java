@@ -50,11 +50,17 @@ public class OrderItem extends BaseEntity{
         return orderItem; // 생성된 주문상품 반환
     }
 
+    public void cancel(){
+        this.getItem().addStock(count);
+    }
+
+
     /**
      * 주문상품의 총 가격 계산
      * @return (주문 가격 × 수량)
      */
     public int getTotalPrice() {
+
         return this.getOrderPrice()*this.count;
     }
 }

@@ -13,6 +13,7 @@ import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.thymeleaf.util.StringUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -102,10 +103,6 @@ public class OrderService {
             // 해당 주문에 속한 주문상품 리스트 가져오기
             List<OrderItem> orderItems = order.getOrderItems();
 
-            log.info("---------------------------------");
-            log.info("orderItems.size() : {}", orderItems.size());
-            log.info("---------------------------------");
-
             // 각 주문상품 처리
             for (OrderItem orderItem : orderItems) {
 
@@ -125,5 +122,29 @@ public class OrderService {
         }
         // 5) PageImpl로 감싸 반환 (페이징 메타정보 포함)
         return new PageImpl<>(orderHistDtoList, pageable, totalCount);
+    }
+
+    // email(로그인 사용자), orderId(주문번호)
+    public boolean validateOrder(Long orderId, String email) {
+        Member curMember = memberRepository.findByEmail(email);
+
+        Order order = orderRepository.findById(orderId)
+                .orElseThrow(() -> new EntityNotFoundException());
+
+        Member savedMember = order.getMember();
+
+        if(!StringUtils.equals(curMember.getEmail(), savedMember.getEmail())){
+            return false;
+        }
+
+        return true;
+    }
+
+    // 주문 취소
+    public void cancelOrder(Long orderId) {
+        Order order = orderRepository.findById(orderId)
+                .orElseThrow(() -> new EntityNotFoundException());
+
+        order.cancelOrder();
     }
 }
