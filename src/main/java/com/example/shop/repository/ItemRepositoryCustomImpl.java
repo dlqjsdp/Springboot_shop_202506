@@ -36,6 +36,7 @@ public class ItemRepositoryCustomImpl implements ItemRepositoryCustom {
      * - null이면 조건 없음 (전체 조회)
      */
     private BooleanExpression searchSellStatus(ItemSellStatus itemSellStatus) {
+//        private BooleanExpression itemSellStatus(ItemSellStatus itemSellStatus) {
         return itemSellStatus == null
                 ? null
                 : QItem.item.itemSellStatus.eq(itemSellStatus);
@@ -89,6 +90,7 @@ public class ItemRepositoryCustomImpl implements ItemRepositoryCustom {
         // 검색 조건 로그 출력 (디버깅용)
         log.info("itemSearchDto.getSearchDateType() : {}", itemSearchDto.getSearchDateType());
         log.info("itemSearchDto.getItemSellStatus() : {}", itemSearchDto.getSearchSellStatus());
+//        log.info("itemSearchDto.getItemSellStatus() : {}", itemSearchDto.getitemSellStatus());
         log.info("itemSearchDto.getSearchBy(), itemSearchDto.getSearchQuery() : {}",
                 searchByLike(itemSearchDto.getSearchBy(), itemSearchDto.getSearchQuery()));
 
@@ -98,6 +100,7 @@ public class ItemRepositoryCustomImpl implements ItemRepositoryCustom {
                 .where(
                         regDtsAfter(itemSearchDto.getSearchDateType())
                         , searchSellStatus(itemSearchDto.getSearchSellStatus())
+//                        , itemSellStatus(itemSearchDto.getItemSellStatus())
                         , searchByLike(itemSearchDto.getSearchBy(), itemSearchDto.getSearchQuery())
                 )
                 .orderBy(QItem.item.id.desc()) // 최신순 정렬

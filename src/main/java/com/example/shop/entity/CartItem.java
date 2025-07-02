@@ -14,7 +14,7 @@ public class CartItem extends BaseEntity{
     @Id
     @GeneratedValue
     @Column(name="cart_item_id")
-    private Long cartItemId;
+    private Long id;
 
     // 하나의 장바구니(Cart)는 여러 개의 장바구니 항목(CartItem)을 가짐
     @ManyToOne(fetch = FetchType.LAZY)
@@ -27,5 +27,17 @@ public class CartItem extends BaseEntity{
     private Item item;
 
     private int count; // 장바구니에 담긴 해당 상품 개수
+
+    public static CartItem createCartItem(Cart cart, Item item, int count) {
+        CartItem cartItem = new CartItem();
+        cartItem.setCart(cart);
+        cartItem.setItem(item);
+        cartItem.setCount(count);
+        return cartItem;
+    }
+
+    public void addCount(int count) {
+        this.count += count;
+    }
 
 }

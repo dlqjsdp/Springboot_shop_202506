@@ -162,10 +162,10 @@
         <!-- 상품 정보 -->
         <div class="wd50">
             <!-- 판매 상태 뱃지 -->
-            <span th:if="${item.itemSellStatus == T(com.example.shop.constant.ItemSellStatus).SELL}" class="badge badge-primary mgb-15">
+            <span th:if="${item.itemSellStatus.equals(T(com.example.shop.constant.ItemSellStatus).SELL)}" class="badge badge-primary mgb-15">
                 판매중
             </span>
-            <span th:unless="${item.itemSellStatus == T(com.example.shop.constant.ItemSellStatus).SELL}" class="badge btn-danger mgb-15" >
+            <span th:unless="${item.itemSellStatus.equals(T(com.example.shop.constant.ItemSellStatus).SELL)}" class="badge btn-danger mgb-15" >
                 품절
             </span>
 
@@ -195,11 +195,11 @@
             </div>
 
             <!-- 버튼 영역 -->
-            <div th:if="${item.itemSellStatus == T(com.example.shop.constant.ItemSellStatus).SELL}" class="text-right">
+            <div th:if="${item.itemSellStatus.equals(T(com.example.shop.constant.ItemSellStatus).SELL)}" class="text-right">
                 <button type="button" class="btn btn-light border border-primary btn-lg" onclick="addCart()">장바구니 담기</button>
                 <button type="button" class="btn btn-primary btn-lg" onclick="order()">주문하기</button>
             </div>
-            <div th:unless="${item.itemSellStatus == T(com.example.shop.constant.ItemSellStatus).SELL}" class="text-right">
+            <div th:unless="${item.itemSellStatus.equals(T(com.example.shop.constant.ItemSellStatus).SELL)}" class="text-right">
                 <button type="button" class="btn btn-danger btn-lg">품절</button>
             </div>
         </div>
