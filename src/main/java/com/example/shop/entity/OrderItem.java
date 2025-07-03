@@ -43,7 +43,7 @@ public class OrderItem extends BaseEntity{
 
         orderItem.setItem(item); // 주문상품에 상품 정보 설정
         orderItem.setCount(count); // 주문 수량 설정
-        orderItem.setOrderPrice(item.getPrice()); // 주문 당시의 상품 가격 저장
+        orderItem.setOrderPrice(item.getPrice()); // 주문 당시의 상품 가격 저장 -> 스냅샷
 
         item.removeStock(count); // 주문 수량만큼 상품 재고 차감
 

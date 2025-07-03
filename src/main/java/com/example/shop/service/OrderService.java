@@ -147,4 +147,28 @@ public class OrderService {
 
         order.cancelOrder();
     }
+
+    // 주문 [{itemId : 1, count : 2}, {itemId : 2, count : 5}, {itemId : 3, count : 4}]
+    public Long orders(List<OrderDto> orderDtoList, String email) {
+
+        Member member = memberRepository.findByEmail(email);
+
+        List<OrderItem> orderItemList = new ArrayList<>();
+
+        for (OrderDto orderDto : orderDtoList) {
+            Item item = itemRepository.findById(orderDto.getItemId())
+                    .orElseThrow(() -> new EntityNotFoundException());
+
+            OrderItem orderItem =
+                    OrderItem.createOrderItem(item, orderDto.getCount());
+
+            orderItemList.add(orderItem);
+        }
+
+        Order order = Order.createOrder(member, orderItemList);
+
+        orderRepository.save(order);
+
+        return order.getId();
+    }
 }
